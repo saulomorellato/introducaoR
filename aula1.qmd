@@ -340,3 +340,6 @@ tbl_summary(dados,
             statistic=list(all_continuous() ~ "{mean} ({sd})",
                            all_categorical() ~ "{n} ({p}%)"))
 ```
+
+
+# Por hoje é isso!!
