@@ -1,0 +1,342 @@
+---
+title: "Introdução ao R/RStudio - Aula 01"
+author: "Saulo Morellato"
+format: 
+  revealjs: 
+    css: custom.css
+    smaller: true
+    theme: serif
+    footer: "Departamento de Estatística da UFES"
+editor: visual
+---
+
+```{r setup, include = FALSE}
+
+# options(htmltools.dir.version = FALSE)
+# knitr::opts_chunk$set(comment = "#>", fig.align = "center")
+# options(dplyr.print_min = 5, dplyr.print_max = 5, dplyr.width = 70)
+
+# library(knitr)
+# opts_chunk$set(fig.align='center', fig.width=4, fig.height=4.2, 
+# cache=TRUE, size="large")
+
+```
+
+```{css}
+code.sourceCode {
+  font-size: 1.25em;
+  /* or try font-size: xx-large; */
+}
+```
+
+# Introdução
+
+## R
+
+::: extrapad
+-   Ambiente de linha de comando;
+
+-   Software 100% open source;
+
+-   Ativo: builds frequentes;
+
+-   Extensível: pacotes;
+
+-   Multi-plataforma: windows, linux, mac;
+
+-   Sensível à maiúsculas e minúsculas.
+:::
+
+## RGui
+
+::: extrapad
+-   Ambiente de linha de comando simples;
+
+-   Interface de digitação + dispositivo gráfico;
+
+-   Instalado por padrão.
+:::
+
+## RStudio
+
+::: extrapad
+-   IDE mais avançada;
+
+-   Possui versão 100% gratuita;
+
+-   Será utilizado durante o curso.
+:::
+
+## Instalação
+
+![](download.png){width="80%"}
+
+
+# Matemática
+
+## R como calculadora
+
+-   Conta simples e direta.
+
+```{r}
+#| label: calc01
+#| echo: true
+
+2+2 # Soma
+8-3 # Subtração
+3*8 # Multiplicação
+8/2 # Divisão
+2^8 # Potências
+(2+4)/7 # Prioridade de solução
+```
+
+## R como calculadora - parte 2
+
+-   Atribuindo valores a variaveis e executando a conta.
+
+```{r}
+#| label: calc02
+#| echo: true
+
+a <- 2
+b <- 3
+a+b
+
+A <- 5
+a*A
+```
+
+
+# Funções
+
+## Estrutura das funções
+
+-   É preciso escrever o nome da função, abrir um parêntese, fornecer um ou mais argumentos para ela ser executada e fechar o parêntese. $$funcao(argumento_1=valor_1,\ argumento_2=valor_2)$$
+-   Exemplos:
+
+```{r}
+#| label: calc03
+#| echo: true
+
+log(x = 8) # Logaritmo natural de 8
+rep(x = 1, times = 4) # Repetir o valor 1 quatro vezes
+sum(1, 8, 79) # Soma de vários valores
+```
+
+## Estrutura das funções - parte 2
+
+-   A função $\log$ precisa de dois argumentos $$\log(x,\ base)$$ onde $x$ é um valor númerico e $base$ é a base que o algoritmo que será calculado.
+
+-   Exemplo:
+
+```{r}
+#| label: calc04
+#| echo: true
+log(x = 8, base = 2) # Logaritmo de 8 na base 2, especificando cada argumento.
+log(8, 2) # Logaritmo de 8 na base 2, seguindo a ordem dos argumentos na função.
+log(base = 2, x = 8) # Logaritmo de 8 na base 2, mudando a ordem dos argumentos. Note...
+log(2, 8) # ... que o resultado é diferente se os argumentos não são especificados.
+```
+
+## Estrutura das funções - parte 3
+
+-   Se verificarmos com detalhes os argumentos da função log vamos encontrar o seguinte: $$\log(x,base=\exp(1))$$ o argumento $base$ já está preestabelecido (*default*) sendo esse valor $\exp(1)$, ou seja, a função exponential do valor 1, que é usado para calcular o logaritmo natural.
+
+```{r}
+#| label: calc05
+#| echo: true
+
+log(x = 8, base = exp(1)) # Logaritmo de 8 na base natural. Isso é o mesmo...
+log(8) # ... se o argumento base não for especificado
+```
+
+
+# Ajuda
+
+## Ajuda
+
+::: extrapad
+-   A função mais importante do R é a função *help* ou *?*.
+-   Com essa função é possível encontrar o arquivo de ajuda das funções.
+-   Esse arquivo geralmente contêm uma descrição do que a função exatamente faz, dos argumentos necessários, descrição dos resultados, referências e exemplos.
+
+```{r}
+#| label: help01
+#| echo: true
+#| eval: false
+
+
+help(log) # Abre a ajuda da função log, ou então...
+?log # ... também abre a ajuda
+```
+:::
+
+
+## Ajuda - parte 2
+
+Os principais itens do arquivo de ajuda da função são:
+
+-   **Description** - Apresenta um resumo sobre o que a função faz.
+-   **Usage** - Mostra todos os argumentos, ordem e as opções preestabelecidas de cada um.
+-   **Arguments** - Explica cada argumento.
+-   **Details** - Detalhes sobre o uso da função, métodos e aplicação.
+-   **Value** - Explica cada um dos os resultados.
+-   **References** – Referências dos métodos.
+-   **See also** - Funções relacionadas.
+-   **Examples** - Mostra alguns exemplos que podem ser executados.
+
+
+# Estatística Básica
+
+## Valores em um vetor
+
+-   Antes de apresentar algumas funções estatísticas precisamos saber que uma amostra de pode ser guardada em um vetor.
+
+```{r}
+#| label: stat01
+#| echo: true
+
+x <- c(2, 15, 7, 8, 9, 1) # criando o vetor de valores (amostra)
+x  # visualizando o vetor x
+x[3]  # visualizando o terceiro elemento do vetor x
+x[2:4]  # visualizando do segundo ao quarto elemento de x
+```
+
+## Estatísticas básicas
+
+-   Vejamos agora algumas funções estatísticas.
+
+```{r}
+#| label: stat02
+#| echo: true
+
+mean(x)  # média de x
+median(x)  # mediana de x
+sd(x)  # desvio padrão de x
+summary(x)  # sumário (resumo) de x
+```
+
+## Vetor de variável qualitativa
+
+-   Considere uma amostra de 10 alunos em relação à situação destes ao final do semestre.
+
+```{r}
+#| label: stat03
+#| echo: true
+
+y <- c("aprovado", "aprovado", "recuperação", "reprovado", "aprovado",
+       "recuperação", "aprovado", "aprovado", "recuperação", "reprovado")
+y  # visualizando y
+mean(y)  # média de y? não funciona
+summary(y)  # sumário de y? não funciona
+class(y)  # "classe de y" = character
+y <- factor(y)  # transformando y em factor
+summary(y)  # sumário (resumo) de y
+```
+
+
+# Carregando Dados
+
+## Carregando diferentes tipos de arquivos.
+
+- Para carregar arquivos com extensão *.txt* use a função $$read.table(file,\ header=TRUE)$$
+
+```{r}
+#| label: data01
+#| echo: true
+
+dados_txt <- read.table("iris.txt", header=TRUE)
+```
+
+- Para carregar arquivos com extensão *.csv* (separado por vírgula) use a função $$read.csv(file)$$
+
+```{r}
+#| label: data02
+#| echo: true
+
+dados_csv <- read.csv("iris.csv")
+```
+
+
+## Utilizando pacote *readxl* para carregar arquivos excel
+
+- Para carregar arquivos com extensão *.xls* ou *.xlsx* use a função $$read.excel(file)$$
+
+```{r}
+#| label: data03
+#| echo: true
+
+library(readxl)  # carregando pacote readxl
+dados_excel <- read_excel("iris.xlsx")
+```
+
+
+# Manipulando os dados
+
+## Manipulando o data frame
+
+-   Elementos do data frame
+
+```{r}
+#| label: manip01
+#| echo: true
+
+dados <- read_excel("iris.xlsx")
+dados[2,3]  # segundo elemento da terceira coluna
+dados[3,1]  # terceiro elemento da primeira coluna
+dados$Species[1:4]  # 4 primeiros elementos da variável Species
+```
+
+## Manipulando o data frame - parte 2
+
+-   Manipulando o data frame
+
+```{r}
+#| label: manip02
+#| echo: true
+
+str(dados)  # analisando a estrutura do data frame
+dados$Species <- factor(dados$Species)  # transformando a variável Species em factor
+summary(dados)  # sumário do data frame
+```
+
+## Manipulando o data frame - parte 3
+
+-   Tabela de resultados
+
+```{r}
+#| label: manip03
+#| echo: true
+
+library(gtsummary)
+
+tbl_summary(dados)
+```
+
+
+## Manipulando o data frame - parte 4
+
+-   Tabela de resultados - versão 2
+
+```{r}
+#| label: manip04
+#| echo: true
+
+tbl_summary(dados,
+            statistic=list(all_continuous() ~ "{mean} ({sd})",
+                           all_categorical() ~ "{n} ({p}%)"))
+```
+
+## Manipulando o data frame - parte 5
+
+-   Tabela de resultados - versão 3
+
+```{r}
+#| label: manip05
+#| echo: true
+
+tbl_summary(dados,
+            by=Species,
+            statistic=list(all_continuous() ~ "{mean} ({sd})",
+                           all_categorical() ~ "{n} ({p}%)"))
+```
